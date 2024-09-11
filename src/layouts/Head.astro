@@ -11,12 +11,12 @@ const { metadata } = Astro.props;
   <meta charset="UTF-8" />
   <meta name="description" content={metadata.description} />
   <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href="/icon.png" />
   <meta name="generator" content={Astro.generator} />
   <title>{metadata.title}</title>
   <meta name="description" content={metadata.description} />
   <meta name="application-name" content={metadata.applicationName} />
-  {metadata.authors && metadata.authors.map(author => (
+  {metadata.authors && metadata.authors.map((author:string) => (
     <meta name="author" content={author} />
   ))}
   {metadata.keywords && (
@@ -80,4 +80,7 @@ const { metadata } = Astro.props;
   {metadata.twitter?.imageHeight && (
     <meta name="twitter:image:height" content={metadata.twitter.imageHeight.toString()} />
   )}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">  
 </head>

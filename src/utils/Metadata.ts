@@ -45,27 +45,28 @@ export type Metadata = {
 };
 
 const Metadata: Metadata = {
-  title: "Astro & React App",
-  description: "This is a sample application using Astro and React.",
-  applicationName: "AstroReactApp",
-  keywords: ["astro", "react", "app"],
+  title: "kanakanho's Portfolio",
+  description: "kanakanho のポートフォリオサイトです",
+  applicationName: "kanakanho's Portfolio",
+  authors: ["kanakanho"],
+  keywords: ["kanakanho", "プロフィール", "愛知工業大学"],
   category: "website",
   openGraph: {
-    title: "Astro & React App",
-    description: "Astro & React App",
-    siteName: "Astro & React App",
-    url: "https://example.com",
+    title: "kanakanho's Portfolio",
+    description: "kanakanho のポートフォリオサイトです",
+    siteName: "kanakanho's Portfolio",
+    url: "https://kanakanho.dev",
     type: "website",
-    imageAlt: "Astro & React App",
-    image: "https://example.com/ogp.jpg",
+    imageAlt: "kanakanho's icon",
+    image: "/my-icon.png",
   },
   twitter: {
     card: "summary_large_image",
-    site: "@example",
-    creator: "@example",
-    description: "Astro & React App",
+    site: "@Shiba_ao_",
+    creator: "@Shiba_ao_",
+    description: "kanakanho のポートフォリオサイトです",
     imageType: "image/png",
-    image: "https://example.com/twitter-image.jpg",
+    image: "/my-icon.png",
   },
 };
 
