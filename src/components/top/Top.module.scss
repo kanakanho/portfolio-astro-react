@@ -1,0 +1,20 @@
+.topBox {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/night-city.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: auto;
+
+  @media screen and (max-width: 1200px) {
+    background-image: url("/night-city-light.png");
+    background-position: center right 40%;
+  }
+
+  .messageBox {
+    position: relative;
+    overflow: hidden;
+  }
+}

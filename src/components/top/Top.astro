@@ -1,0 +1,20 @@
+---
+import styles from "./Top.module.scss";
+import FirstMessage from "./first_message/FirstMessage.astro";
+import SecondMessage from "./socend_message/SecondMessage.astro";
+import ThirdMessage from "./third_message/ThirdMessage.astro";
+---
+
+<div class={styles.topBox}>
+  <div class={styles.messageBox}>
+    <div class={styles.firstMessageBox}>
+      <FirstMessage />
+    </div>
+    <div class={styles.secondMessageBox}>
+      <SecondMessage />
+    </div>
+    <div class={styles.thirdMessageBox}>
+      <ThirdMessage />
+    </div>
+  </div>
+</div>

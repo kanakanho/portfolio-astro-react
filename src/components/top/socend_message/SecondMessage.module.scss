@@ -1,0 +1,52 @@
+.message {
+  text-align: right;
+  padding: 25vh 8%;
+
+  strong {
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 6rem;
+    text-shadow:
+      #fc0 1px 0 10px,
+      #333 0 0 20px;
+  }
+
+  p {
+    font-family: "Noto Serif JP", serif;
+    color: white;
+    font-size: 4rem;
+    text-shadow:
+      #ddd 1px 0 10px,
+      #000 4px 0 40px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .message {
+    padding: 50vh 8% 60vh 8%;
+    height: 100vh;
+    display: flex;
+    justify-content: end;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    gap: 2rem;
+
+    strong {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 2.2rem;
+      writing-mode: vertical-rl;
+    }
+
+    .englishWord {
+      writing-mode: horizontal-tb;
+      height: 4rem;
+    }
+
+    .secondSentence {
+      transform: translateY(50vh);
+    }
+  }
+}
