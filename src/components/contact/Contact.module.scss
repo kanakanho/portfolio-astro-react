@@ -1,0 +1,25 @@
+.title {
+  font-size: 4rem;
+  margin: 1rem 0;
+  @media screen and (max-width: 1200px) {
+    font-size: 3rem;
+  }
+}
+
+.message {
+  font-size: 1.2rem;
+}
+
+.mail {
+  margin: 4rem 0;
+  display: flex;
+  gap: 4rem;
+  font-size: 2.4rem;
+
+  @media screen and (max-width: 1200px) {
+    margin: 2rem 0;
+    padding-left: 1rem;
+    gap: 1rem;
+    font-size: 1.4rem;
+  }
+}

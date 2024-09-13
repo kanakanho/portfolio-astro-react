@@ -1,7 +1,24 @@
 * {
+  --font-color-dark: #333;
+  --font-color-light: #fff;
+  --background-color-dark: #333;
+  --background-color-light: #eee;
+
+  --font-color-main: var(--font-color-dark);
+  --font-color-opposite: var(--font-color-light);
+  --background-color-main: var(--background-color-light);
+  --background-color-opposite: var(--background-color-dark);
+
+  --font-color-main: var(--font-color-light);
+  --font-color-opposite: var(--font-color-dark);
+  --background-color-main: var(--background-color-dark);
+  --background-color-opposite: var(--background-color-light);
+
   margin: 0;
   padding: 0;
   transition: all 0.5s;
+  font-family: "Lato", sans-serif;
+  color: var(--font-color-main);
 }
 body {
   width: 100vw;
@@ -10,7 +27,7 @@ body {
 }
 html {
   font-family: system-ui, sans-serif;
-  background-color: #333;
+  background-color: var(--background-color-main);
   overflow: hidden;
 }
 a {
