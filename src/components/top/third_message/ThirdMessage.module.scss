@@ -1,0 +1,70 @@
+.message {
+  padding: 40vh 8% 20vh 8%;
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: repeat(2, max-content);
+  gap: 2rem 4rem;
+
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  mask-image: linear-gradient(to top, rgb(0 0 0 / 100%) 60%, rgb(0 0 0 / 0%) 95%);
+  mask-composite: intersect;
+
+  .category {
+    display: grid;
+    grid-column: span 2;
+    grid-template-columns: subgrid;
+
+    cursor: pointer;
+    // hover アニメーション開始時の設定
+    text-decoration: none;
+    text-underline-offset: -0.2rem;
+    text-decoration-color: #666;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: silver;
+      text-underline-offset: 0.4rem;
+    }
+  }
+
+  strong {
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 3rem;
+    text-shadow:
+      #fc0 1px 0 10px,
+      #333 0 0 20px;
+  }
+
+  p {
+    font-family: "Noto Serif JP", serif;
+    color: white;
+    font-size: 3rem;
+    text-shadow:
+      #ddd 1px 0 10px,
+      #000 4px 0 40px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .message {
+    padding: 30vh 8% 10vh 8%;
+    grid-template-columns: max-content;
+    backdrop-filter: blur(10px);
+    mask-image: linear-gradient(to top, rgb(0 0 0 / 100%) 80%, rgb(0 0 0 / 0%) 100%);
+
+    .category {
+      grid-column: span 1;
+    }
+
+    strong {
+      font-size: 2.4rem;
+    }
+
+    p {
+      font-size: 5.8vw;
+    }
+  }
+}
