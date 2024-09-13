@@ -1,0 +1,95 @@
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 2rem;
+
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.linkCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  padding: 2rem 3rem;
+  border: 0.1rem solid var(--font-color-main);
+  border-radius: 1rem;
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  .svgImage {
+    width: 5rem;
+    height: 5rem;
+
+    mask-size: contain;
+    mask-repeat: no-repeat;
+
+    background-color: var(--font-color-main);
+  }
+
+  &:hover {
+    background-color: var(--background-color-opposite);
+    scale: 0.99;
+    p {
+      color: var(--font-color-opposite);
+      filter: invert(0.1);
+    }
+    .svgImage {
+      background-color: var(--font-color-opposite);
+      filter: invert(0.1);
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+
+    border-radius: 0.6rem;
+
+    gap: 0;
+    padding: 1rem 2rem;
+
+    .svgImage {
+      grid-row: 1;
+      grid-column: 1;
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .linkName {
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    .accountName {
+      grid-row: 1;
+      grid-column: 3;
+    }
+  }
+}
+
+.x {
+  mask-image: url("/link_icon/x.svg");
+}
+
+.github {
+  mask-image: url("/link_icon/github.svg");
+}
+
+.qiita {
+  mask-image: url("/link_icon/qiita.svg");
+}
+
+.zenn {
+  mask-image: url("/link_icon/zenn.svg");
+}
+
+.youtube {
+  mask-image: url("/link_icon/youtube.svg");
+}
