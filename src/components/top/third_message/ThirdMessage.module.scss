@@ -14,6 +14,18 @@
     display: grid;
     grid-column: span 2;
     grid-template-columns: subgrid;
+
+    cursor: pointer;
+    // hover アニメーション開始時の設定
+    text-decoration: none;
+    text-underline-offset: -0.2rem;
+    text-decoration-color: #666;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-color: silver;
+      text-underline-offset: 0.4rem;
+    }
   }
 
   strong {
@@ -38,7 +50,7 @@
 
 @media screen and (max-width: 1200px) {
   .message {
-    padding: 30vh 8% 16vh 8%;
+    padding: 30vh 8% 10vh 8%;
     grid-template-columns: max-content;
     backdrop-filter: blur(10px);
     mask-image: linear-gradient(to top, rgb(0 0 0 / 100%) 80%, rgb(0 0 0 / 0%) 100%);
