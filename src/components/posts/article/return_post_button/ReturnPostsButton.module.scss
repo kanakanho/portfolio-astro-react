@@ -1,0 +1,36 @@
+.backToPosts {
+  display: flex;
+  justify-content: center;
+  margin: 5rem 15%;
+  padding: 0.6rem;
+  background-color: var(--background-color-main);
+  border: 0.1rem solid var(--font-color-main);
+  box-shadow: 0 0 20px 0 var(--background-color-opposite);
+
+  border-radius: 0.5rem;
+
+  div {
+    display: flex;
+    align-items: center;
+    font-size: 2rem;
+
+    p {
+      padding: 0 0.5rem;
+      font-size: 1.4rem;
+    }
+  }
+
+  &:hover {
+    background-color: var(--background-color-opposite);
+    box-shadow: 0 0 20px 0 var(--background-color-main);
+    scale: 0.99;
+    svg {
+      filter: invert(1);
+      transform: translateX(-0.5rem);
+    }
+    p {
+      color: var(--font-color-opposite);
+      transform: translateX(0.1rem);
+    }
+  }
+}

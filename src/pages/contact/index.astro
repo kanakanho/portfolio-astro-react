@@ -1,13 +1,13 @@
 ---
-import Contact from '@/components/contact/Contact.astro';
-import Footer from '@/components/footer/Footer.astro';
-import Header from '@/components/header/Header.astro';
-import Layout from '@/layouts/Layout.astro';
-import Metadata from '@/utils/Metadata';
-import styles from './index.module.scss';
+import Contact from "@/components/contact/Contact.astro";
+import Footer from "@/components/footer/Footer.astro";
+import Header from "@/components/header/Header.astro";
+import Layout from "@/layouts/Layout.astro";
+import DefaultMetadata from "@/utils/DefaultMetadata";
+import styles from "./index.module.scss";
 ---
 
-<Layout metadata={Metadata}>
+<Layout metadata={DefaultMetadata}>
   <Header navigate="contact" />
   <main class={styles.contactBox}>
     <Contact />

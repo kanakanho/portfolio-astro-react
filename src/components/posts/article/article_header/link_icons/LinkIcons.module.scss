@@ -1,0 +1,38 @@
+.linkIcons {
+  display: flex;
+  gap: 1rem;
+}
+
+.linkIcon {
+  display: flex;
+  align-items: center;
+  .svgImage {
+    width: 2rem;
+    height: 2rem;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: var(--font-color-dark);
+
+    padding-bottom: 0.2rem;
+
+    &:hover {
+      transform: scale(0.9);
+      filter: invert(0.1);
+    }
+  }
+
+  .github {
+    mask-image: url("/link_icon/github.svg");
+  }
+
+  .youtube {
+    width: 2rem;
+    height: 1.6rem;
+    mask-image: url("/link_icon/youtube.svg");
+  }
+
+  .website {
+    font-size: 2rem;
+    background-color: inherit;
+  }
+}

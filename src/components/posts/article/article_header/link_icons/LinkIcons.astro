@@ -1,0 +1,38 @@
+---
+import styles from "./LinkIcons.module.scss";
+import { IoIosGlobe } from "react-icons/io";
+
+type Props = {
+  repoUrl: string | undefined;
+  youtubeUrl: string | undefined;
+  websiteUrl: string | undefined;
+};
+
+const { repoUrl, youtubeUrl, websiteUrl } = Astro.props;
+---
+
+<div class={styles.linkIcons}>
+  {
+    repoUrl && (
+      <a href={repoUrl} target="_blank" rel="noopener noreferrer" class={styles.linkIcon}>
+        <div class:list={[`${styles.svgImage}`, `${styles.github}`]} />
+      </a>
+    )
+  }
+  {
+    youtubeUrl && (
+      <a href={youtubeUrl} target="_blank" rel="noopener noreferrer" class={styles.linkIcon}>
+        <div class:list={[`${styles.svgImage}`, `${styles.youtube}`]} />
+      </a>
+    )
+  }
+  {
+    websiteUrl && (
+      <a href={websiteUrl} target="_blank" rel="noopener noreferrer" class={styles.linkIcon}>
+        <div class:list={[`${styles.svgImage}`, `${styles.website}`]}>
+          <IoIosGlobe />
+        </div>
+      </a>
+    )
+  }
+</div>

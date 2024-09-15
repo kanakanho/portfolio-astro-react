@@ -1,0 +1,29 @@
+---
+import LinkIcons from "./link_icons/LinkIcons.astro";
+import styles from "./ArticleHeader.module.scss";
+import Tags from "./tags/Tags.astro";
+
+type Props = {
+  title: string;
+  tags: string[];
+  repoUrl: string | undefined;
+  youtubeUrl: string | undefined;
+  websiteUrl: string | undefined;
+  date: string;
+};
+
+const { title, tags, repoUrl, youtubeUrl, websiteUrl, date } = Astro.props;
+---
+
+<div class={styles.articleHeaderContainer}>
+  <Tags tags={tags} />
+  <div class={styles.articleHeader}>
+    <h1>{title}</h1>
+    <div class={styles.additionalInfo}>
+      <LinkIcons repoUrl={repoUrl} youtubeUrl={youtubeUrl} websiteUrl={websiteUrl} />
+      <p>
+        {date}
+      </p>
+    </div>
+  </div>
+</div>
