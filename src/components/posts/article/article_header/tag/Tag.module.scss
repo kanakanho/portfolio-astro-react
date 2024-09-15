@@ -1,0 +1,23 @@
+.tag {
+  font-size: 1rem;
+  padding: 0.2rem 0.5rem;
+  background-color: var(--background-color-accent);
+  border-radius: 0.2rem;
+
+  p {
+    color: var(--font-color-opposite);
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background-color: var(--background-color-opposite);
+    transform: scale(0.95);
+    p {
+      color: var(--font-color-opposite);
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    font-size: 1rem;
+  }
+}

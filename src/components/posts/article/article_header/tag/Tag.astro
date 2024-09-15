@@ -1,0 +1,13 @@
+---
+import styles from "./Tag.module.scss";
+
+type Props = {
+  tag: string;
+};
+
+const { tag } = Astro.props;
+---
+
+<a href={`/posts/tag/${tag}`} class={styles.tag}>
+  <p>#&nbsp;{tag}</p>
+</a>

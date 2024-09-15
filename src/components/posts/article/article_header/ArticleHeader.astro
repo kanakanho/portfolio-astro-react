@@ -1,7 +1,7 @@
 ---
 import LinkIcons from "./link_icons/LinkIcons.astro";
 import styles from "./ArticleHeader.module.scss";
-import Tags from "./tags/Tags.astro";
+import Tag from "./tag/Tag.astro";
 
 type Props = {
   title: string;
@@ -16,8 +16,10 @@ const { title, tags, repoUrl, youtubeUrl, websiteUrl, date } = Astro.props;
 ---
 
 <div class={styles.articleHeaderContainer}>
-  <Tags tags={tags} />
   <div class={styles.articleHeader}>
+    <div class={styles.tagContainer}>
+      {tags.map((tag) => <Tag tag={tag} />)}
+    </div>
     <h1>{title}</h1>
     <div class={styles.additionalInfo}>
       <LinkIcons repoUrl={repoUrl} youtubeUrl={youtubeUrl} websiteUrl={websiteUrl} />
