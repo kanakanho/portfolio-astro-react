@@ -1,0 +1,34 @@
+---
+import styles from "./Article.module.scss";
+import markdownStyles from "@/styles/markdown.module.scss";
+import ArticleHeader from "@/components/posts/article/article_header/ArticleHeader.astro";
+import type { AstroComponentFactory } from "astro/dist/runtime/server";
+import ReturnPostsButton from "./return_post_button/ReturnPostsButton.astro";
+
+type Props = {
+  Content: AstroComponentFactory;
+  title: string;
+  tags: string[];
+  repoUrl: string | undefined;
+  youtubeUrl: string | undefined;
+  websiteUrl: string | undefined;
+  date: string;
+};
+
+const { Content, title, tags, repoUrl, youtubeUrl, websiteUrl, date } = Astro.props;
+---
+
+<main class={styles.articleContainer}>
+  <ArticleHeader
+    title={title}
+    tags={tags}
+    repoUrl={repoUrl}
+    youtubeUrl={youtubeUrl}
+    websiteUrl={websiteUrl}
+    date={date}
+  />
+  <article class={markdownStyles.markdown}>
+    <Content />
+  </article>
+</main>
+<ReturnPostsButton />

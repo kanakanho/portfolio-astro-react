@@ -1,0 +1,31 @@
+---
+import type Frontmatter from "@/types/Frontmatter";
+import styles from "./Main.module.scss";
+import PostCard from "./post_card/PostCard.astro";
+
+type Props = {
+  frontmatters: Frontmatter[];
+  tag: string;
+};
+
+const { frontmatters, tag } = Astro.props;
+---
+
+<main class={styles.postsContainer}>
+  <div class={styles.title}>
+    <a href="/posts">
+      <h1>Posts</h1>
+    </a>
+    {
+      tag && (
+        <div class={styles.tag}>
+          <a class={styles.closeButton} href="/posts" />
+          <p>{tag}</p>
+        </div>
+      )
+    }
+  </div>
+  <div class={styles.postCardsContainer}>
+    {frontmatters.map((frontmatter) => <PostCard frontmatter={frontmatter} />)}
+  </div>
+</main>

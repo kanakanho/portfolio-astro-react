@@ -1,0 +1,53 @@
+.linkIcons {
+  display: flex;
+  gap: 1rem;
+}
+
+.linkIcon {
+  display: flex;
+  align-items: center;
+  .svgImage {
+    width: 2rem;
+    height: 2rem;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: var(--font-color-dark);
+
+    padding-bottom: 0.2rem;
+
+    &:hover {
+      transform: scale(0.9);
+      filter: invert(0.1);
+    }
+  }
+
+  .github {
+    mask-image: url("/link_icon/github.svg");
+  }
+
+  .youtube {
+    width: 2rem;
+    height: 1.6rem;
+    mask-image: url("/link_icon/youtube.svg");
+    transform: translateY(0.2rem);
+  }
+
+  .website {
+    font-size: 2rem;
+    background-color: inherit;
+  }
+
+  @media screen and (max-width: 1200px) {
+    gap: 0.5rem;
+    .svgImage {
+      font-size: 1.5rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+    .youtube {
+      width: 1.5rem;
+      height: 1.2rem;
+      transform: translateY(0.1rem);
+    }
+  }
+}
