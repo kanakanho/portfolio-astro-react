@@ -4,7 +4,7 @@
   justify-content: space-around;
   align-items: center;
 
-  padding: 4vh 0;
+  padding: 4vh 0 2vh 0;
 
   @media screen and (max-width: 1200px) {
     display: block;
@@ -55,7 +55,7 @@
       background-color: var(--font-color-main);
 
       &:hover {
-        background-color: var(--font-color-opposite);
+        // background-color: var(--font-color-opposite);
         filter: invert(1);
         scale: 0.8;
       }

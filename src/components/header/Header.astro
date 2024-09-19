@@ -1,5 +1,5 @@
 ---
-import styles from './Header.module.scss';
+import styles from "./Header.module.scss";
 
 type Props = {
   navigate: string;
@@ -13,16 +13,16 @@ const { navigate } = Astro.props;
     <p class={styles.mainName}>kanakanho&nbsp;/&nbsp;しばいぬ</p>
   </a>
   <div class={styles.navigation}>
-    <a href="/about" class={navigate === 'about' ? styles.open : ''}>
+    <a href="/about" class={navigate === "about" ? styles.open : ""}>
       <p>About me</p>
     </a>
-    <a href="/works" class={navigate === 'works' ? styles.open : ''}>
+    <a href="/works" class={navigate === "works" ? styles.open : ""}>
       <p>Works</p>
     </a>
-    <a href="/posts" class={navigate === 'posts' ? styles.open : ''}>
+    <a href="/posts" class={navigate === "posts" ? styles.open : ""}>
       <p>Posts</p>
     </a>
-    <a href="/contact" class={navigate === 'contact' ? styles.open : ''}>
+    <a href="/contact" class={navigate === "contact" ? styles.open : ""}>
       <p>Contact&nbsp;/&nbsp;Links</p>
     </a>
     <a href="https://github.com/kanakanho" class={styles.link}>

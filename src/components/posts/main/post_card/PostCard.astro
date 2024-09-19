@@ -1,0 +1,28 @@
+---
+import type Frontmatter from "@/types/Frontmatter";
+import styles from "./PostCard.module.scss";
+import Tag from "./tag/Tag.astro";
+
+type Props = {
+  frontmatter: Frontmatter;
+};
+
+const { frontmatter } = Astro.props;
+---
+
+<a href={`/posts/id/${frontmatter.number}`}>
+  <div class={styles.overline}>
+    <div class={styles.postCard}>
+      <div class={styles.tags}>
+        {Array.isArray(frontmatter.tags) && frontmatter.tags.map((tag) => <Tag tag={tag} />)}
+      </div>
+      <p class={styles.date}>{frontmatter.date}</p>
+      <h1 class={styles.title}>{frontmatter.title}</h1>
+      <p class={styles.description}>{frontmatter.options?.description}</p>
+      <div class={styles.postLink}>詳しくはこちら →</div>
+      <div class={styles.imgBox}>
+        <img src={frontmatter.options?.image ?? "/default_img.png"} alt={frontmatter.title} />
+      </div>
+    </div>
+  </div>
+</a>

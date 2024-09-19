@@ -1,8 +1,9 @@
 ---
-import type { Metadata } from "@/utils/Metadata";
-interface Props {
+import type Metadata from "@/types/Metadata";
+
+type Props = {
   metadata: Metadata;
-}
+};
 
 const { metadata } = Astro.props;
 ---
