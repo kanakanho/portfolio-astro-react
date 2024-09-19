@@ -21,7 +21,7 @@ const { frontmatter } = Astro.props;
       <p class={styles.description}>{frontmatter.options?.description}</p>
       <div class={styles.postLink}>詳しくはこちら →</div>
       <div class={styles.imgBox}>
-        <img src={frontmatter.options?.image} alt={frontmatter.title} />
+        <img src={frontmatter.options?.image ?? "/default_img.png"} alt={frontmatter.title} />
       </div>
     </div>
   </div>

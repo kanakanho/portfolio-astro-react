@@ -16,13 +16,15 @@ export async function getStaticPaths() {
   const activePosts = posts.filter((post) => post.frontmatter.isActive);
 
   const tags: string[] = [];
-  activePosts.forEach((post) => {
-    post.frontmatter.tags.forEach((tag) => {
-      if (!tags.includes(tag)) {
-        tags.push(tag);
-      }
+  if (activePosts.length !== 0) {
+    activePosts.forEach((post) => {
+      post.frontmatter.tags.forEach((tag) => {
+        if (!tags.includes(tag)) {
+          tags.push(tag);
+        }
+      });
     });
-  });
+  }
 
   return tags.map((tag) => ({
     params: {
