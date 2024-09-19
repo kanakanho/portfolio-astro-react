@@ -1,10 +1,10 @@
-* {
+:root {
   --accent: hotpink;
 
   --font-color-dark: #333;
   --font-color-light: #fff;
   --background-color-dark: #333;
-  --background-color-accent: #ccc;
+  --background-color-accent: #aaa;
   --background-color-light: #eee;
 
   --font-color-main: var(--font-color-dark);
@@ -12,11 +12,17 @@
   --background-color-main: var(--background-color-light);
   --background-color-opposite: var(--background-color-dark);
 
-  --font-color-main: var(--font-color-light);
-  --font-color-opposite: var(--font-color-dark);
-  --background-color-main: var(--background-color-dark);
-  --background-color-opposite: var(--background-color-light);
+  @media (prefers-color-scheme: dark) {
+    --font-color-main: var(--font-color-light);
+    --font-color-opposite: var(--font-color-dark);
+    --background-color-main: var(--background-color-dark);
+    --background-color-opposite: var(--background-color-light);
+  }
 
+  --posts-line-top: #7f7fff;
+  --posts-line-bottom: #53b9ab;
+}
+* {
   margin: 0;
   padding: 0;
   transition: all 0.5s;
