@@ -18,7 +18,7 @@ const { title, tags, repoUrl, youtubeUrl, websiteUrl, date } = Astro.props;
 <div class={styles.articleHeaderContainer}>
   <div class={styles.articleHeader}>
     <div class={styles.tagContainer}>
-      {tags?.map((tag) => <Tag tag={tag} />)}
+      {Array.isArray(tags) && tags.map((tag) => <Tag tag={tag} />)}
     </div>
     <h1>{title}</h1>
     <div class={styles.additionalInfo}>

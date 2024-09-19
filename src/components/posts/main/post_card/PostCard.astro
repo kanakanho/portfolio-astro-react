@@ -14,7 +14,7 @@ const { frontmatter } = Astro.props;
   <div class={styles.overline}>
     <div class={styles.postCard}>
       <div class={styles.tags}>
-        {frontmatter.tags?.map((tag) => <Tag tag={tag} />)}
+        {Array.isArray(frontmatter.tags) && frontmatter.tags.map((tag) => <Tag tag={tag} />)}
       </div>
       <p class={styles.date}>{frontmatter.date}</p>
       <h1 class={styles.title}>{frontmatter.title}</h1>
