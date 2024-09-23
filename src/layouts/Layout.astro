@@ -1,7 +1,7 @@
 ---
+import "@/styles/global.scss";
 import type Metadata from "@/types/Metadata";
 import Head from "./Head.astro";
-import "@/styles/global.scss";
 
 type Props = {
   metadata: Metadata;
@@ -15,5 +15,12 @@ const { metadata } = Astro.props;
   <Head metadata={metadata} />
   <body>
     <slot />
-  </body>
+  </body><script is:inline>
+    // localStorageにデータがあるときはそちらを適用
+    const colorMode = window.localStorage.getItem("color-mode");
+
+    if (colorMode === "light" || colorMode === "dark") {
+      document.body.setAttribute("color-mode", colorMode);
+    }
+  </script>
 </html>

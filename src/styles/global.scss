@@ -12,16 +12,19 @@
   --background-color-main: var(--background-color-light);
   --background-color-opposite: var(--background-color-dark);
 
-  @media (prefers-color-scheme: dark) {
+  --posts-line-top: #7f7fff;
+  --posts-line-bottom: #53b9ab;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
     --font-color-main: var(--font-color-light);
     --font-color-opposite: var(--font-color-dark);
     --background-color-main: var(--background-color-dark);
     --background-color-opposite: var(--background-color-light);
   }
-
-  --posts-line-top: #7f7fff;
-  --posts-line-bottom: #53b9ab;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -29,16 +32,34 @@
   font-family: "Lato", sans-serif;
   color: var(--font-color-main);
 }
+
 body {
   width: 100vw;
   height: 100vh;
   overflow: auto;
+  background-color: var(--background-color-main);
 }
+
+*[color-mode="dark"] {
+  --font-color-main: var(--font-color-light);
+  --font-color-opposite: var(--font-color-dark);
+  --background-color-main: var(--background-color-dark);
+  --background-color-opposite: var(--background-color-light);
+}
+
+*[color-mode="light"] {
+  --font-color-main: var(--font-color-dark);
+  --font-color-opposite: var(--font-color-light);
+  --background-color-main: var(--background-color-light);
+  --background-color-opposite: var(--background-color-dark);
+}
+
 html {
   font-family: system-ui, sans-serif;
   background-color: var(--background-color-main);
   overflow: hidden;
 }
+
 a {
   text-decoration: none;
   color: inherit;

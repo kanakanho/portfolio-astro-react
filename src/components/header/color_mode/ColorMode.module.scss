@@ -1,0 +1,76 @@
+.buttonBox {
+  z-index: calc(infinity);
+  display: flex;
+
+  width: 4rem;
+  height: 2rem;
+
+  @media screen and (max-width: 1200px) {
+    width: 3.2rem;
+    height: 1.6rem;
+  }
+}
+
+.toggleButton {
+  border: none;
+  border-radius: 1rem;
+
+  background-color: transparent;
+
+  width: 2rem;
+  height: 2rem;
+
+  &:hover {
+    transform: scale(0.9);
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}
+
+.lightMode,
+.darkMode {
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  margin: 0.3rem;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  background-color: transparent;
+
+  transition: all 0s;
+
+  @media screen and (max-width: 1200px) {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+}
+
+.lightMode {
+  background-color: var(--font-color-main);
+  mask-image: url("/color_mode/light_mode.svg");
+}
+
+.darkMode {
+  background-color: var(--background-color-accent);
+  mask-image: url("/color_mode/dark_mode.svg");
+}
+
+[color-mode="dark"] .darkMode {
+  background-color: var(--font-color-main);
+}
+
+[color-mode="dark"] .lightMode {
+  background-color: var(--background-color-accent);
+}
+
+[color-mode="light"] .lightMode {
+  background-color: var(--font-color-main);
+}
+
+[color-mode="light"] .darkMode {
+  background-color: var(--background-color-accent);
+}
