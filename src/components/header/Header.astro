@@ -1,4 +1,5 @@
 ---
+import ColorMode from "./color_mode/ColorMode";
 import styles from "./Header.module.scss";
 
 type Props = {
@@ -9,24 +10,25 @@ const { navigate } = Astro.props;
 ---
 
 <header class={styles.header}>
-  <a href="/">
-    <p class={styles.mainName}>kanakanho&nbsp;/&nbsp;しばいぬ</p>
+  <a href="/" class={styles.mainName}>
+    <h1>kanakanho&nbsp;/&nbsp;しばいぬ</h1>
   </a>
-  <div class={styles.navigation}>
-    <!-- <a href="/about" class={navigate === "about" ? styles.open : ""}>
-      <p>About me</p>
-    </a> -->
-    <!-- <a href="/works" class={navigate === "works" ? styles.open : ""}>
-      <p>Works</p>
-    </a> -->
-    <a href="/posts" class={navigate === "posts" ? styles.open : ""}>
-      <p>Posts</p>
-    </a>
-    <a href="/contact" class={navigate === "contact" ? styles.open : ""}>
-      <p>Contact&nbsp;/&nbsp;Links</p>
-    </a>
-    <a href="https://github.com/kanakanho" class={styles.link}>
-      <div class={styles.svgImage}></div>
-    </a>
+  <a href="/about" class:list={[navigate === "about" ? styles.open : "", styles.about]}>
+    <p>About me</p>
+  </a>
+  <a href="/works" class:list={[navigate === "works" ? styles.open : "", styles.works]}>
+    <p>Works</p>
+  </a>
+  <a href="/posts" class:list={[navigate === "posts" ? styles.open : "", styles.posts]}>
+    <p>Posts</p>
+  </a>
+  <a href="/contact" class:list={[navigate === "contact" ? styles.open : "", styles.contact]}>
+    <p>Contact&nbsp;/&nbsp;Links</p>
+  </a>
+  <a href="https://github.com/kanakanho" class={styles.link}>
+    <div class={styles.svgImage}></div>
+  </a>
+  <div class={styles.colorMode}>
+    <ColorMode client:only="react" />
   </div>
 </header>
