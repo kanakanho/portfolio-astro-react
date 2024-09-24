@@ -1,4 +1,5 @@
 ---
+import About from "@/components/about/About";
 import Footer from "@/components/footer/Footer.astro";
 import Header from "@/components/header/Header.astro";
 import Layout from "@/layouts/Layout.astro";
@@ -7,6 +8,6 @@ import DefaultMetadata from "@/utils/DefaultMetadata";
 
 <Layout metadata={DefaultMetadata}>
   <Header navigate="about" />
-  <h1 style="width: 100vw; height: 70vh; display:grid; place-items: center;">Comming Soon ...</h1>
+  <About />
   <Footer />
 </Layout>

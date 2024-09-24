@@ -1,0 +1,57 @@
+.iconsContainer {
+  margin-top: 5rem;
+  h1 {
+    border-bottom: 2px solid var(--background-color-opposite);
+  }
+
+  @media screen and (max-width: 1200px) {
+    margin-top: 1rem;
+  }
+}
+
+.iconCategoryContainer {
+  h2 {
+    margin: 2rem 0;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--background-color-opposite);
+  }
+
+  @media screen and (max-width: 1200px) {
+    h2 {
+      margin: 1rem 0;
+    }
+  }
+}
+
+.iconCategory {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem 2rem;
+
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+}
+
+.iconBox {
+  display: grid;
+  place-items: center;
+
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+}
+
+.icon {
+  border-radius: 0.4rem;
+  padding: 0.4rem;
+  background-color: var(--background-color-light);
+
+  &:hover {
+    padding: 0.3rem;
+    transform: scale(1.1);
+  }
+}
+
+.iconName {
+  text-align: center;
+}
