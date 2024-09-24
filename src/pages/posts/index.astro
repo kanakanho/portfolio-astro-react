@@ -12,7 +12,10 @@ const posts: MarkdownInstance<Frontmatter>[] = await Astro.glob<Frontmatter>("..
 
 const frontmatters: Frontmatter[] = posts
   .filter((post) => post.frontmatter.isActive)
-  .map((post) => post.frontmatter);
+  .map((post) => post.frontmatter)
+  .sort((a, b) => {
+    return a.date < b.date ? 1 : -1;
+  });
 
 const metaData: Metadata = {
   ...DefaultMetadata,
