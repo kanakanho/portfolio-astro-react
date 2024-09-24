@@ -45,6 +45,11 @@
   border-radius: 0.4rem;
   padding: 0.4rem;
   background-color: var(--background-color-light);
+
+  &:hover {
+    padding: 0.3rem;
+    transform: scale(1.1);
+  }
 }
 
 .iconName {
