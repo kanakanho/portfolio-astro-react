@@ -1,0 +1,37 @@
+.worksContainer {
+  margin: 20px 0;
+
+  .worksHeader {
+    margin: 1rem 16%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+
+    gap: 3rem;
+
+    .worksTitle {
+      font-size: 4rem;
+    }
+
+    p {
+      margin: 0.6rem 0;
+
+      font-size: 1.8rem;
+    }
+
+    @media screen and (max-width: 1200px) {
+      margin: 0.5rem 1rem;
+      gap: 1rem;
+
+      .worksTitle {
+        font-size: 2rem;
+        margin: 0.2rem 0;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+      }
+    }
+  }
+}

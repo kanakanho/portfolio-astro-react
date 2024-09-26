@@ -1,3 +1,11 @@
+export type FrontmatterWork = {
+  worksDisplay: boolean;
+  worksIsLarge: boolean;
+  worksTitle: string;
+  worksDescription: string;
+  worksImage: string;
+};
+
 type Frontmatter = {
   isActive: boolean;
   number: string;
@@ -11,12 +19,7 @@ type Frontmatter = {
     website?: string;
     image?: string;
   };
-  works?: {
-    worksDisplay: boolean;
-    worksTitle: string;
-    worksDescription: string;
-    worksImage: string;
-  };
+  works?: FrontmatterWorks;
 };
 
 export default Frontmatter;
