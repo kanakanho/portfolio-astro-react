@@ -16,6 +16,8 @@
 
   position: relative;
 
+  overflow: hidden;
+
   img {
     width: var(--small-img-width);
     height: var(--small-img-height);
@@ -104,6 +106,10 @@
   }
 
   &:hover {
+    img {
+      scale: 1.02;
+    }
+
     .texts {
       opacity: 1;
 

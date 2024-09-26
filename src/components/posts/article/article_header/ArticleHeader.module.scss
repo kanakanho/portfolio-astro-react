@@ -7,8 +7,15 @@
 
   border-bottom: 0.3rem solid var(--font-color-dark);
 
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 2fr 1fr;
+  }
+
   .tagContainer {
     display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
     gap: 0.5rem;
     grid-row: 1;
     grid-column: 1;
@@ -45,6 +52,8 @@
     @media screen and (max-width: 1200px) {
       grid-row: 1;
       grid-column: 2;
+
+      gap: 0.2rem;
 
       p {
         font-size: 1.2rem;
