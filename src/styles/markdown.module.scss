@@ -6,7 +6,7 @@
   h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    border-bottom: 2px solid var(--font-color-dark);
+    border-bottom: 2px solid var(--font-color-main);
     padding-bottom: 10px;
     margin-top: 40px;
     margin-bottom: 10px;
@@ -17,7 +17,7 @@
     margin: 30px 0;
     margin-bottom: 10px;
     font-weight: 700;
-    border-bottom: 1px solid var(--font-color-dark);
+    border-bottom: 1px solid var(--font-color-main);
     padding-bottom: 10px;
   }
 
@@ -84,6 +84,10 @@
     margin: 20px 0;
     margin-bottom: 30px;
 
+    td {
+      color: var(--font-color-dark);
+    }
+
     th {
       padding: 8px;
       line-height: 1.6;
@@ -97,6 +101,7 @@
       line-height: 1.6;
       vertical-align: top;
       border: 1px solid var(--font-color-dark);
+      background-color: var(--background-color-accent);
     }
 
     tr:nth-child(odd) td {
