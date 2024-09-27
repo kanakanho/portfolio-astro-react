@@ -84,4 +84,16 @@ const { metadata } = Astro.props;
     href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans+JP:wght@100..900&display=swap"
     rel="stylesheet"
   />
+  <!-- Google tag (gtag.js) -->
+  <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-L9DP779GL6"
+  ></script>
+  <script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-L9DP779GL6");
+  </script>
 </head>
