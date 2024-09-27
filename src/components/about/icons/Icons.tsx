@@ -6,10 +6,14 @@ import {
   SiBiome,
   SiC,
   SiCloudflare,
+  SiCloudflarepages,
   SiCloudflareworkers,
   SiCss3,
   SiDocker,
+  SiEslint,
   SiFigma,
+  SiFirebase,
+  SiGin,
   SiGit,
   SiGithub,
   SiGithubactions,
@@ -22,6 +26,7 @@ import {
   SiMinio,
   SiMiro,
   SiNeo4j,
+  SiNetlify,
   SiNextdotjs,
   SiNodedotjs,
   SiNumpy,
@@ -33,11 +38,14 @@ import {
   SiReact,
   SiSass,
   SiScipy,
+  SiStorybook,
   SiStyledcomponents,
+  SiSupabase,
   SiSwift,
   SiTauri,
   SiThreedotjs,
   SiTypescript,
+  SiTypst,
   SiUnity,
   SiVercel,
   SiVite,
@@ -88,33 +96,37 @@ const IconMap: {
       name: "Next.js",
       icon: SiNextdotjs,
     },
-    styledcomponents: {
-      name: "Styled Components",
-      icon: SiStyledcomponents,
+    hono: {
+      name: "Hono",
+      icon: SiHono,
     },
     astro: {
       name: "Astro",
       icon: SiAstro,
     },
-    biome: {
-      name: "Biome",
-      icon: SiBiome,
-    },
-    prettier: {
-      name: "Prettier",
-      icon: SiPrettier,
-    },
-    hono: {
-      name: "Hono",
-      icon: SiHono,
+    vite: {
+      name: "Vite",
+      icon: SiVite,
     },
     tauri: {
       name: "Tauri",
       icon: SiTauri,
     },
-    vite: {
-      name: "Vite",
-      icon: SiVite,
+    biome: {
+      name: "Biome",
+      icon: SiBiome,
+    },
+    eslint: {
+      name: "ESLint",
+      icon: SiEslint,
+    },
+    prettier: {
+      name: "Prettier",
+      icon: SiPrettier,
+    },
+    storybook: {
+      name: "Storybook",
+      icon: SiStorybook,
     },
     vercel: {
       name: "Vercel",
@@ -124,9 +136,29 @@ const IconMap: {
       name: "Cloudflare",
       icon: SiCloudflare,
     },
+    cloudflarepages: {
+      name: "Cloudflare Pages",
+      icon: SiCloudflarepages,
+    },
     cloudflareworkers: {
       name: "Cloudflare Workers",
       icon: SiCloudflareworkers,
+    },
+    supabase: {
+      name: "Supabase",
+      icon: SiSupabase,
+    },
+    firebase: {
+      name: "Firebase",
+      icon: SiFirebase,
+    },
+    netlify: {
+      name: "Netlify",
+      icon: SiNetlify,
+    },
+    styledcomponents: {
+      name: "Styled Components",
+      icon: SiStyledcomponents,
     },
     threedotjs: {
       name: "Three.js",
@@ -189,6 +221,10 @@ const IconMap: {
       name: "Go",
       icon: SiGo,
     },
+    gin: {
+      name: "Gin",
+      icon: SiGin,
+    },
     docker: {
       name: "Docker",
       icon: SiDocker,
@@ -232,6 +268,10 @@ const IconMap: {
     markdown: {
       name: "Markdown",
       icon: SiMarkdown,
+    },
+    typst: {
+      name: "Typst",
+      icon: SiTypst,
     },
     c: {
       name: "C/C#",
