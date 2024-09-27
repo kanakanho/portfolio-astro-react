@@ -1,5 +1,7 @@
 # Astro React Template
 
+This is a Release Branch
+
 - Astro
   - Vite
   - React
