@@ -56,11 +56,16 @@
   }
 
   ul {
-    padding-left: 2em;
+    padding-left: 1em;
     list-style: inside;
 
     ul {
       list-style-type: circle;
+    }
+
+    li {
+      margin: 10px 0;
+      font-size: 1.2rem;
     }
   }
 
@@ -73,7 +78,11 @@
     color: var(--font-color-dark);
     word-break: break-all;
     word-wrap: break-word;
-    background-color: var(--background-color-accent);
+    background-color: #fafafa;
+  }
+
+  pre > code > span > span {
+    color: var(--font-color-dark) !important;
   }
 
   table {
@@ -107,5 +116,19 @@
     tr:nth-child(odd) td {
       background-color: var(--background-color-light);
     }
+  }
+
+  blockquote {
+    padding: 0 1em;
+    color: var(--font-color-main);
+    border-left: 0.25em solid var(--background-color-accent);
+  }
+
+  blockquote > :first-child {
+    margin-top: 0;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
   }
 }
