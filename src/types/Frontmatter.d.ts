@@ -1,9 +1,9 @@
 export type FrontmatterWork = {
-  worksDisplay: boolean;
-  worksIsLarge: boolean;
-  worksTitle: string;
-  worksDescription: string;
-  worksImage: string;
+  worksDisplay?: boolean | null;
+  worksIsLarge?: boolean | null;
+  worksTitle?: string | null;
+  worksDescription?: string | null;
+  worksImage?: string | null;
 };
 
 type Frontmatter = {
@@ -13,11 +13,11 @@ type Frontmatter = {
   date: string;
   tags: string[];
   options?: {
-    description?: string;
-    repository?: string;
-    youtube?: string;
-    website?: string;
-    image?: string;
+    description?: string | null;
+    repository?: string | null;
+    youtube?: string | null;
+    website?: string | null;
+    image?: string | null;
   };
   works?: FrontmatterWorks;
 };

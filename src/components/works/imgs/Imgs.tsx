@@ -14,7 +14,7 @@ const Imgs = ({ frontmatters }: Props): ReactElement => {
           key={index}
           className={`${styles.workImage} ${index % 3 === 0 ? styles.workImageEven : styles.workImageOdd}`}
           href={
-            frontmatter.options?.website !== undefined
+            frontmatter.options?.website !== null && frontmatter.options?.website !== undefined
               ? frontmatter.options.website
               : `/posts/id/${frontmatter.number}`
           }
