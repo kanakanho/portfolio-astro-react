@@ -101,6 +101,8 @@
       padding: 8px;
       line-height: 1.6;
       vertical-align: top;
+      font-size: 1.1rem;
+      color: var(--font-color-light);
       border: 1px solid var(--font-color-dark);
       background-color: var(--background-color-accent);
     }
@@ -110,11 +112,6 @@
       line-height: 1.6;
       vertical-align: top;
       border: 1px solid var(--font-color-dark);
-      background-color: var(--background-color-accent);
-    }
-
-    tr:nth-child(odd) td {
-      background-color: var(--background-color-light);
     }
   }
 
