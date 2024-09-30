@@ -7,6 +7,7 @@ import type Frontmatter from "@/types/Frontmatter";
 import type Metadata from "@/types/Metadata";
 import DefaultMetadata from "@/utils/DefaultMetadata";
 import { GetImageType } from "@/utils/GetImageType";
+import type { InferGetStaticPropsType } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -19,11 +20,11 @@ export async function getStaticPaths() {
   }));
 }
 
-type Props = CollectionEntry<"post">;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const post: Props = Astro.props;
-
 const frontmatter: Frontmatter = post.data;
+
 const [extension, imageTypeError] = GetImageType(
   frontmatter.options?.image?.split(".").pop() as string,
 );
