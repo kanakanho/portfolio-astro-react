@@ -6,6 +6,7 @@ import Layout from "@/layouts/Layout.astro";
 import type Frontmatter from "@/types/Frontmatter";
 import type Metadata from "@/types/Metadata";
 import DefaultMetadata from "@/utils/DefaultMetadata";
+import type { InferGetStaticParamsType, InferGetStaticPropsType } from "astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
   }
 
   activePosts.forEach((post) => {
-    post.data.tags.forEach((tag: any) => {
+    post.data.tags.forEach((tag: string) => {
       if (!tags.includes(tag)) {
         tags.push(tag);
       }
@@ -33,13 +34,17 @@ export async function getStaticPaths() {
     props: {
       posts: activePosts
         .filter((post) => post.data.tags.includes(tag))
-        .sort((a: any, b: any) => (a.data.date < b.data.date ? 1 : -1)),
-      tag: tag,
+        .sort((a: CollectionEntry<"post">, b: CollectionEntry<"post">) =>
+          a.data.date < b.data.date ? 1 : -1,
+        ),
     },
   }));
 }
 
-const { posts, tag }: { posts: CollectionEntry<"post">[]; tag: string } = Astro.props;
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { posts }: { posts: Props["posts"] } = Astro.props;
+const { tag }: Params = Astro.params;
 
 const frontmatters: Frontmatter[] = posts.map((post) => post.data);
 

@@ -14,7 +14,7 @@ const DefaultMetadata: Metadata = {
     url: "https://kanakanho.dev",
     type: "website",
     imageAlt: "kanakanho's icon",
-    image: "/icon.png",
+    image: "icon.png",
   },
   twitter: {
     card: "summary_large_image",
@@ -22,7 +22,7 @@ const DefaultMetadata: Metadata = {
     creator: "@Shiba_ao_",
     description: "kanakanho のポートフォリオサイトです",
     imageType: "image/png",
-    image: "/icon.png",
+    image: "icon.png",
   },
 };
 
