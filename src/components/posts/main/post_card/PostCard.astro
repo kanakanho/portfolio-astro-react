@@ -10,7 +10,7 @@ type Props = {
 const { frontmatter } = Astro.props;
 ---
 
-<a href={`/posts/id/${frontmatter.number}`}>
+<a href={`/posts/${frontmatter.number}`}>
   <div class={styles.overline}>
     <div class={styles.postCard}>
       <div class={styles.tags}>
