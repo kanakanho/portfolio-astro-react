@@ -12,26 +12,26 @@ const Abstract = (): ReactElement => {
       <div className={styles.articleContainer}>
         <div className={styles.articleBox}>
           <article>情報系のエンジニアを目指している大学生です</article>
-          <article>webフロントを中心とした開発を活発に行なっています</article>
-          <article>XR技術に興味があり、MetaQuest や VisionPro でのアプリ開発を行っています</article>
-          <article>UI・UX を意識したプロダクト開発を重視しています</article>
+          <article>webフロント・webXRを中心として開発を活発に行なっています</article>
+          <article>
+            XR技術に興味があり、MetaQuest3 や VisionPro でのアプリ開発を行っています
+          </article>
+        </div>
+        <div className={styles.articleBox}>
           <article>Adobe illustrator や Figma でのデザインも行っています</article>
+          <article>UI・UX を意識したプロダクト開発を重視しています</article>
+          <article>プロダクトの目的や意義を重視した開発を大切にしています</article>
         </div>
         <div className={styles.articleBox}>
           <article>
-            研究室では以下の4つを軸に複合現実技術の一般化に向けた研究に取り組んでいます
+            研究室では現実の生活をコンピュータの持つ情報によって豊かにするのを目的として
           </article>
-          <article className={styles.listItem}>
-            PLATEAUをはじめとしたオープンな地理データによる仮想空間の実現
-          </article>
-          <article className={styles.listItem}>
-            位置推定（屋外や屋内といったロケーションや、駅や学校、オフィスといった環境に左右されないもの）の実現
-          </article>
-          <article className={styles.listItem}>それらの合成によるデジタルツインの実現</article>
-          <article className={styles.listItem}>
-            その仮想世界と現実空間のシームレスな接続の実現
+          <article>
+            複合現実によるデジタル空間と現実空間のシームレスな接続のための研究を行っています
           </article>
         </div>
+        <div className={styles.articleBox} />
+        <div className={styles.articleBox} />
       </div>
     </div>
   );
