@@ -10,19 +10,51 @@ const post = defineCollection({
     tags: z.array(z.string()),
     options: z
       .object({
-        description: z.string().optional().nullable().transform((val) => val ?? undefined),
-        repository: z.string().optional().nullable().transform((val) => val ?? undefined),
-        youtube: z.string().optional().nullable().transform((val) => val ?? undefined),
-        website: z.string().optional().nullable().transform((val) => val ?? undefined),
-        image: z.string().optional().nullable().transform((val) => val ?? undefined),
+        description: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
+        repository: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
+        youtube: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
+        website: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
+        image: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
       })
       .optional(),
     works: z
       .object({
         worksDisplay: z.boolean().optional().nullable(),
-        worksTitle: z.string().optional().nullable().transform((val) => val ?? undefined),
-        worksDescription: z.string().optional().nullable().transform((val) => val ?? undefined),
-        worksImage: z.string().optional().nullable().transform((val) => val ?? undefined),
+        worksTitle: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
+        worksDescription: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
+        worksImage: z
+          .string()
+          .optional()
+          .nullable()
+          .transform((val) => val ?? undefined),
       })
       .optional(),
   }),
