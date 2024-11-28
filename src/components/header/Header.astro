@@ -1,5 +1,5 @@
 ---
-import ColorMode from "./color_mode/ColorMode";
+import ColorMode from "./color_mode/ColorMode.astro";
 import styles from "./Header.module.scss";
 
 type Props = {
@@ -29,6 +29,6 @@ const { navigate } = Astro.props;
     <div class={styles.svgImage}></div>
   </a>
   <div class={styles.colorMode}>
-    <ColorMode client:only="react" />
+    <ColorMode/>
   </div>
 </header>
