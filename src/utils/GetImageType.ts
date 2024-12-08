@@ -1,21 +1,21 @@
 import type { ImageType } from "@/types/Metadata";
 
-export function GetImageType(extension: string): [ImageType | null, "ok" | "error"] {
+export function GetImageType(extension: string): [ImageType | null, boolean] {
   switch (extension) {
     case "png":
-      return ["image/png", "ok"];
+      return ["image/png", true];
     case "jpg":
     case "jpeg":
-      return ["image/jpeg", "ok"];
+      return ["image/jpeg", true];
     case "gif":
-      return ["image/gif", "ok"];
+      return ["image/gif", true];
     case "svg":
-      return ["image/svg+xml", "ok"];
+      return ["image/svg+xml", true];
     case "tiff":
-      return ["image/tiff", "ok"];
+      return ["image/tiff", true];
     case "webp":
-      return ["image/webp", "ok"];
+      return ["image/webp", true];
     default:
-      return [null, "error"];
+      return [null, false];
   }
 }
