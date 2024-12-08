@@ -74,6 +74,11 @@ const { metadata } = Astro.props;
       <meta name="twitter:image:height" content={metadata.twitter.imageHeight.toString()} />
     )
   }
+  {
+    metadata.twitter?.imageType && (
+      <meta name="twitter:image:type" content={metadata.twitter.imageType} />
+    )
+  }
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
