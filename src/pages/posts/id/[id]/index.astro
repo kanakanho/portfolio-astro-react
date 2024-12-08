@@ -46,16 +46,15 @@ const metaData: Metadata = {
   },
   twitter: {
     ...DefaultMetadata.twitter,
+    card: imageTypeError ? "summary_large_image" : "summary",
     description:
       `${frontmatter.options?.description}  -${DefaultMetadata.title}` ||
       DefaultMetadata.twitter?.description,
-    image: !imageTypeError
-      ? (frontmatter.options?.image ?? undefined)
+    image: imageTypeError
+      ? frontmatter.options?.image || DefaultMetadata.twitter?.image
       : DefaultMetadata.twitter?.image,
-    imageType: !imageTypeError
-      ? extension
-        ? extension
-        : DefaultMetadata.twitter?.imageType
+    imageType: imageTypeError
+      ? extension || DefaultMetadata.twitter?.imageType
       : DefaultMetadata.twitter?.imageType,
   },
 };
