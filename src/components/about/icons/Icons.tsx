@@ -1,7 +1,5 @@
 import {
-  type IconType,
-  SiAdobeaftereffects,
-  SiAdobeillustrator,
+  type IconType as ReactSimpleIconsIconType,
   SiAstro,
   SiBiome,
   SiC,
@@ -52,13 +50,15 @@ import {
   SiXcode,
 } from "@icons-pack/react-simple-icons";
 import type { ReactElement } from "react";
+import type { IconType as ReactIconsIconType } from "react-icons/lib/iconBase";
+import { SiAdobeaftereffects, SiAdobeillustrator } from "react-icons/si";
 import styles from "./Icons.module.scss";
 
 const IconMap: {
   [key: string]: {
     [key: string]: {
       name: string;
-      icon: IconType;
+      icon: ReactSimpleIconsIconType | ReactIconsIconType;
       color?: string;
     };
   };
@@ -173,10 +173,12 @@ const IconMap: {
     adobeillustrator: {
       name: "Illustrator",
       icon: SiAdobeillustrator,
+      color: "#FF9A00",
     },
     adobeaftereffects: {
       name: "After Effects",
       icon: SiAdobeaftereffects,
+      color: "#9999FF",
     },
   },
   xr: {
@@ -290,6 +292,14 @@ const Icons = (): ReactElement => {
           <div className={styles.iconCategory}>
             {Object.keys(IconMap[category]).map((key: string) => {
               const { name, icon: IconComponent, color } = IconMap[category][key];
+              if (IconComponent === SiAdobeaftereffects || IconComponent === SiAdobeillustrator) {
+                return (
+                  <div key={key} className={styles.iconBox}>
+                    <IconComponent fill={color ?? "default"} size={48} className={styles.icon} />
+                    <p className={styles.iconName}>{name}</p>
+                  </div>
+                );
+              }
               return (
                 <div key={key} className={styles.iconBox}>
                   <IconComponent color={color ?? "default"} size={48} className={styles.icon} />
