@@ -7,7 +7,7 @@ const Abstract = (): ReactElement => {
       <img src="/headshot.jpeg" alt="Headshot" className={styles.headshot} />
       <div className={styles.abstractTextHeader}>
         <h1 className={styles.auther}>柴田青賢</h1>
-        <p className={styles.university}>愛知工業大学 情報科学部 情報科学科 学部2年 梶研究室</p>
+        <p className={styles.university}>愛知工業大学 情報科学部 情報科学科 学部3年 梶研究室</p>
       </div>
       <div className={styles.articleContainer}>
         <div className={styles.articleBox}>
