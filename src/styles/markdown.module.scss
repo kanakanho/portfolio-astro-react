@@ -94,17 +94,13 @@
     margin: 20px 0;
     margin-bottom: 30px;
 
-    td {
-      color: var(--font-color-dark);
-    }
-
     th {
       padding: 8px;
       line-height: 1.6;
       vertical-align: top;
       font-size: 1.1rem;
       color: var(--font-color-light);
-      border: 1px solid var(--font-color-dark);
+      border: 1px solid var(--font-color-main);
       background-color: var(--background-color-accent);
     }
 
@@ -112,7 +108,8 @@
       padding: 8px;
       line-height: 1.6;
       vertical-align: top;
-      border: 1px solid var(--font-color-dark);
+      color: var(--font-color-main);
+      border: 1px solid var(--font-color-main);
     }
   }
 
