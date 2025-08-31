@@ -40,7 +40,7 @@ const metaData: Metadata = {
     description:
       `${frontmatter.options?.description} -${DefaultMetadata.title}` ||
       DefaultMetadata.openGraph?.description,
-    url: `${DefaultMetadata.openGraph?.url}/posts/id/${frontmatter.title}`,
+    url: `${DefaultMetadata.openGraph?.url}/posts/id/${frontmatter.number}`,
     image: frontmatter.options?.image || DefaultMetadata.openGraph?.image,
     imageAlt: `記事【${frontmatter.title}】のタイトル画像`,
   },
