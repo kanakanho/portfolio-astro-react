@@ -66,6 +66,7 @@
     grid-row: 1;
     grid-column: 1;
     display: flex;
+    flex-wrap: wrap;
     gap: 0.4rem;
   }
 
@@ -211,6 +212,7 @@
   }
 
   @media screen and (max-width: 1200px) {
+    width: calc(100vw - 2rem);
     grid-template-columns: 1fr;
 
     p {
@@ -250,18 +252,19 @@
     .imgBox {
       grid-row: 5;
       grid-column: 1 / span 2;
+      width: calc(100vw - 2rem);
 
       img {
-        width: 100%;
+        width: calc(100vw - 2rem);
         height: auto;
       }
 
       &::before {
-        width: 100%;
+        width: calc(100vw - 2rem);
         height: 100%;
       }
       &::after {
-        width: 100%;
+        width: calc(100vw - 2rem);
         height: 100%;
       }
     }
