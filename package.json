@@ -2,10 +2,14 @@
   "name": "kanakanho-portfolio-by-astro",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
+    "dev": "yarn fetch-post-images && astro dev",
+    "start": "yarn fetch-post-images && astro dev",
+    "build": "yarn fetch-post-images && astro check && astro build",
+    "fetch-post-images": "node scripts/fetch-post-images.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "biome": "biome check --write ./src && biome format --write ./src && prettier --write ./src",

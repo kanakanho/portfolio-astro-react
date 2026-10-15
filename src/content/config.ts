@@ -1,3 +1,4 @@
+import { replaceEsaUrls } from "@/utils/PostImages.mjs";
 import { defineCollection, z } from "astro:content";
 
 const post = defineCollection({
@@ -34,7 +35,7 @@ const post = defineCollection({
           .string()
           .optional()
           .nullable()
-          .transform((val) => val ?? undefined),
+          .transform((val) => (val == null ? undefined : replaceEsaUrls(val))),
       })
       .optional(),
     works: z
@@ -54,7 +55,7 @@ const post = defineCollection({
           .string()
           .optional()
           .nullable()
-          .transform((val) => val ?? undefined),
+          .transform((val) => (val == null ? undefined : replaceEsaUrls(val))),
       })
       .optional(),
   }),
