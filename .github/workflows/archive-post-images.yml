@@ -1,0 +1,48 @@
+# 記事に追加された esa の画像・PDF をダウンロードして assets/post-images にコミットする
+# esa 側で画像が閲覧できなくなっても、リポジトリに残した画像からサイトを配信できるようにする
+name: Archive post images
+
+on:
+  push:
+    branches:
+      - release
+    paths:
+      - "src/content/post/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: archive-post-images-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Download new images
+        run: node scripts/fetch-post-images.mjs --strict
+
+      # 一部の取得に失敗しても、取得できた画像はコミットする (ジョブは失敗として残る)
+      - name: Commit archived images
+        if: ${{ !cancelled() }}
+        run: |
+          git add assets/post-images
+          if git diff --cached --quiet; then
+            echo "No new images"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: 記事の画像を assets/post-images に保存"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

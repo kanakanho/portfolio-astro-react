@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# self-hosted post images (copied from assets/post-images at build time)
+public/post-images/
+
 # generated types
 .astro/
 
