@@ -51,22 +51,6 @@ const post = defineCollection({
           image: postImage(),
         })
         .optional(),
-      works: z
-        .object({
-          worksDisplay: z.boolean().optional().nullable(),
-          worksTitle: z
-            .string()
-            .optional()
-            .nullable()
-            .transform((val) => val ?? undefined),
-          worksDescription: z
-            .string()
-            .optional()
-            .nullable()
-            .transform((val) => val ?? undefined),
-          worksImage: postImage(),
-        })
-        .optional(),
     });
   },
 });
