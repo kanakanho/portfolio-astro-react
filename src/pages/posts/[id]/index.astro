@@ -23,7 +23,7 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const post: Props = Astro.props;
 const frontmatter: Frontmatter = post.data;
 
-const metaData = GetPostMetadata(frontmatter);
+const metaData = await GetPostMetadata(frontmatter);
 
 const { Content } = await post.render();
 ---

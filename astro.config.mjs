@@ -3,7 +3,7 @@ import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
 // @ts-check
 import { defineConfig } from "astro/config";
-import { rehypePostImages } from "./src/utils/PostImages.mjs";
+import { rehypePostImages, remarkPostImages } from "./src/utils/PostImages.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +17,7 @@ export default defineConfig({
     }),
   ],
   markdown: {
+    remarkPlugins: [remarkPostImages],
     rehypePlugins: [rehypePostImages],
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
