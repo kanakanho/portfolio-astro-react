@@ -3,11 +3,17 @@
   grid-template-columns: max-content 1fr;
   gap: 1rem 3rem;
 
-  .headshot {
+  .icon {
     width: 400px;
     height: auto;
 
-    border-radius: 10px;
+    mix-blend-mode: multiply;
+
+    // ダークモードでは白を黒に反転させてから screen で黒を透過させる (色相は hue-rotate で戻す)
+    body[color-mode="dark"] & {
+      filter: invert(1) hue-rotate(180deg);
+      mix-blend-mode: screen;
+    }
 
     grid-column: 1;
     grid-row: 1 / span 2;
@@ -27,37 +33,6 @@
     .auther {
       font-size: 2rem;
       font-weight: 300;
-      padding-left: 3rem;
-      position: relative;
-
-      &::before {
-        display: grid;
-        place-items: end;
-
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-
-        margin: 0.5rem;
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50%;
-
-        background-image: url("/icon.png");
-        background-size: cover;
-        background-repeat: no-repeat;
-        mix-blend-mode: multiply;
-      }
-
-      body[color-mode="dark"] &::before {
-        mix-blend-mode: screen;
-      }
-    }
-
-    .university {
-      font-size: 1.2rem;
-      padding-bottom: 0.3rem;
     }
   }
 
@@ -80,8 +55,9 @@
   @media screen and (max-width: 1200px) {
     grid-template-columns: 1fr;
 
-    .headshot {
-      width: 100%;
+    .icon {
+      width: min(60%, 400px);
+      justify-self: center;
       grid-row: 3;
     }
 
@@ -94,10 +70,6 @@
       align-items: flex-start;
 
       gap: 0rem;
-
-      .university {
-        font-size: 1rem;
-      }
     }
 
     .articleContainer {

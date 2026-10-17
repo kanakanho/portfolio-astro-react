@@ -16,9 +16,6 @@ const { navigate } = Astro.props;
   <a href="/about" class:list={[navigate === "about" ? styles.open : "", styles.about]}>
     <p>About me</p>
   </a>
-  <a href="/works" class:list={[navigate === "works" ? styles.open : "", styles.works]}>
-    <p>Works</p>
-  </a>
   <a href="/posts" class:list={[navigate === "posts" ? styles.open : "", styles.posts]}>
     <p>Posts</p>
   </a>
