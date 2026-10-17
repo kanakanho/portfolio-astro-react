@@ -1,7 +1,7 @@
-import type Frontmatter from "@/types/Frontmatter";
 import type { ReactElement } from "react";
-import styles from "./Works.module.scss";
+import type Frontmatter from "@/types/Frontmatter";
 import Imgs from "./imgs/Imgs";
+import styles from "./Works.module.scss";
 
 type Props = {
   frontmatters: Frontmatter[];

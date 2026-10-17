@@ -1,12 +1,12 @@
 ---
 import ArticleHeader from "@/components/posts/article/article_header/ArticleHeader.astro";
 import markdownStyles from "@/styles/markdown.module.scss";
-import type { AstroComponentFactory } from "astro/dist/runtime/server";
+import type { render } from "astro:content";
 import styles from "./Article.module.scss";
 import ReturnPostsButton from "./return_post_button/ReturnPostsButton.astro";
 
 type Props = {
-  Content: AstroComponentFactory;
+  Content: Awaited<ReturnType<typeof render>>["Content"];
   title: string;
   tags: string[];
   repoUrl: string | undefined;

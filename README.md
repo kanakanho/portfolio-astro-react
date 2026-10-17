@@ -10,27 +10,27 @@
 
 ## 開発用サーバーの起動
 ```sh
-$ yarn dev
+$ pnpm dev
 ```
 
 ## ビルド
 ```sh
-$ yarn build
+$ pnpm build
 ```
 
 ## プレビュー
 ```sh
-$ yarn preview
+$ pnpm preview
 ```
 
 ## Linter & Formatter
 ```sh
-$ yarn biome
+$ pnpm biome
 ```
 
 ## Storybook
 ```sh
-$ yarn storybook
+$ pnpm storybook
 ```
 
 > [!WARNING]

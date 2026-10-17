@@ -1,25 +1,24 @@
-import { defineCollection, z } from "astro:content";
-import { toPostImagePath } from "@/utils/PostImages.mjs";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
+import { POST_DIR, toPostImagePath } from "@/utils/PostImages.mjs";
 
 const post = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.md", base: POST_DIR }),
   schema: ({ image }) => {
     const postImage = () =>
-      z
-        .string()
-        .nullish()
-        .transform(toPostImagePath)
-        .pipe(
-          z
-            .union([
-              z
-                .string()
-                .regex(/^\.\.?\//)
-                .pipe(image()),
-              z.string(),
-            ])
-            .optional(),
-        );
+      z.preprocess(
+        (value) => toPostImagePath(typeof value === "string" ? value : undefined),
+        z
+          .union([
+            z.preprocess(
+              (value) => (typeof value === "string" && /^\.\.?\//.test(value) ? value : null),
+              image(),
+            ),
+            z.string(),
+          ])
+          .optional(),
+      );
 
     return z.object({
       isActive: z.boolean(),

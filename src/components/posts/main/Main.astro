@@ -16,16 +16,16 @@ const { frontmatters, tag } = Astro.props;
     <a href="/posts">
       <h1>Posts</h1>
     </a>
-    {
-      tag && (
-        <div class={styles.tag}>
-          <a class={styles.closeButton} href="/posts" />
-          <p>{tag}</p>
-        </div>
-      )
-    }
+    {tag && (
+      <div class={styles.tag}>
+        <a class={styles.closeButton} href="/posts" />
+        <p>{tag}</p>
+      </div>
+    )}
   </div>
   <div class={styles.postCardsContainer}>
-    {frontmatters.map((frontmatter) => <PostCard frontmatter={frontmatter} />)}
+    {frontmatters.map((frontmatter) => (
+      <PostCard frontmatter={frontmatter} />
+    ))}
   </div>
 </main>

@@ -1,20 +1,12 @@
 import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
 import type Frontmatter from "@/types/Frontmatter";
 import type Metadata from "@/types/Metadata";
 import DefaultMetadata from "@/utils/DefaultMetadata";
 import { GetImageType } from "@/utils/GetImageType";
-import type { ImageMetadata } from "astro";
 
 /** OGP 画像として配信する形式 (それ以外は png に変換する) */
 const OGP_FORMATS = ["png", "jpg", "jpeg", "webp", "gif"] as const;
-
-/**
- * 元画像を出力に残さずに画像の形式を読む
- * ImageMetadata のプロパティを直接読むと元画像が参照ありとみなされるため、Astro の getImage と同じく clone から読む
- */
-function getOriginalFormat(image: ImageMetadata): string {
-  return ((image as ImageMetadata & { clone?: ImageMetadata }).clone ?? image).format;
-}
 
 /** OGP 画像の絶対 URL と拡張子 */
 async function getOgpImage(
@@ -31,9 +23,8 @@ async function getOgpImage(
     };
   }
 
-  const originalFormat = getOriginalFormat(image);
-  const format = OGP_FORMATS.find((format) => format === originalFormat) ?? "png";
-  const optimized = await getImage({ src: image, width: 1200, fit: "inside", format });
+  const format = OGP_FORMATS.find((format) => format === image.format) ?? "png";
+  const optimized = await getImage({ src: image, width: 1200, format });
   return { url: new URL(optimized.src, DefaultMetadata.openGraph?.url).href, extension: format };
 }
 

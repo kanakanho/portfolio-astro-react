@@ -1,3 +1,4 @@
+import { unified } from "@astrojs/markdown-remark";
 import partytown from "@astrojs/partytown";
 import react from "@astrojs/react";
 import expressiveCode from "astro-expressive-code";
@@ -7,6 +8,7 @@ import { rehypePostImages, remarkPostImages } from "./src/utils/PostImages.mjs";
 
 // https://astro.build/config
 export default defineConfig({
+  compressHTML: true,
   integrations: [
     react(),
     expressiveCode(),
@@ -17,8 +19,10 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkPostImages],
-    rehypePlugins: [rehypePostImages],
+    processor: unified({
+      remarkPlugins: [remarkPostImages],
+      rehypePlugins: [rehypePostImages],
+    }),
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
       // https://shiki.style/themes
@@ -29,15 +33,6 @@ export default defineConfig({
       defaultColor: false,
       // Enable word wrap to prevent horizontal scrolling
       wrap: true,
-    },
-  },
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: "modern-compiler",
-        },
-      },
     },
   },
 });
