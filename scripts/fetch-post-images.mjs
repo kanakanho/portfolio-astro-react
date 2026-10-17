@@ -36,7 +36,7 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
  * @param {string} url
- * @returns {Promise<Buffer | null>}
+ * @returns {Promise<Uint8Array | null>}
  */
 const download = async (url) => {
   for (let attempt = 1; attempt <= 3; attempt++) {
@@ -50,7 +50,7 @@ const download = async (url) => {
           console.warn(`  unexpected content-type ${contentType} ${url}`);
           return null;
         }
-        return Buffer.from(await res.arrayBuffer());
+        return new Uint8Array(await res.arrayBuffer());
       }
       // 403, 404 はリトライしても変わらない
       if (res.status === 403 || res.status === 404) {
