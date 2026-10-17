@@ -6,7 +6,7 @@ import {
   SiCloudflare,
   SiCloudflarepages,
   SiCloudflareworkers,
-  SiCss3,
+  SiCss,
   SiDocker,
   SiEslint,
   SiFigma,
@@ -50,8 +50,9 @@ import {
   SiXcode,
 } from "@icons-pack/react-simple-icons";
 import type { ReactElement } from "react";
-import type { IconType as ReactIconsIconType } from "react-icons/lib/iconBase";
-import { SiAdobeaftereffects, SiAdobeillustrator } from "react-icons/si";
+import type { IconType as ReactIconsIconType } from "react-icons";
+// simple-icons から Adobe のアイコンが削除されたため Tabler Icons のものを使う
+import { TbBrandAdobeAfterEffect, TbBrandAdobeIllustrator } from "react-icons/tb";
 import styles from "./Icons.module.scss";
 
 const IconMap: {
@@ -70,7 +71,7 @@ const IconMap: {
     },
     css3: {
       name: "CSS3",
-      icon: SiCss3,
+      icon: SiCss,
     },
     sass: {
       name: "Sass",
@@ -172,12 +173,12 @@ const IconMap: {
   design: {
     adobeillustrator: {
       name: "Illustrator",
-      icon: SiAdobeillustrator,
+      icon: TbBrandAdobeIllustrator,
       color: "#FF9A00",
     },
     adobeaftereffects: {
       name: "After Effects",
-      icon: SiAdobeaftereffects,
+      icon: TbBrandAdobeAfterEffect,
       color: "#9999FF",
     },
   },
@@ -292,10 +293,18 @@ const Icons = (): ReactElement => {
           <div className={styles.iconCategory}>
             {Object.keys(IconMap[category]).map((key: string) => {
               const { name, icon: IconComponent, color } = IconMap[category][key];
-              if (IconComponent === SiAdobeaftereffects || IconComponent === SiAdobeillustrator) {
+              // Tabler Icons は線で描くアイコンで、全体に指定している color が path に効いてしまうため stroke で色を指定する
+              if (
+                IconComponent === TbBrandAdobeAfterEffect ||
+                IconComponent === TbBrandAdobeIllustrator
+              ) {
                 return (
                   <div key={key} className={styles.iconBox}>
-                    <IconComponent fill={color ?? "default"} size={48} className={styles.icon} />
+                    <IconComponent
+                      stroke={color ?? "currentColor"}
+                      size={48}
+                      className={styles.icon}
+                    />
                     <p className={styles.iconName}>{name}</p>
                   </div>
                 );
