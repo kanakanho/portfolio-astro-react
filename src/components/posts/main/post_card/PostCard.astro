@@ -23,18 +23,16 @@ const image = frontmatter.options?.image ?? "/default_img.png";
       <p class={styles.description}>{frontmatter.options?.description}</p>
       <div class={styles.postLink}>詳しくはこちら →</div>
       <div class={styles.imgBox}>
-        {
-          typeof image !== "string" ? (
-            <Image
-              src={image}
-              alt={frontmatter.title}
-              widths={[480, 960, 1440]}
-              sizes="(max-width: 1200px) calc(100vw - 2rem), 480px"
-            />
-          ) : (
-            <img src={image} alt={frontmatter.title} />
-          )
-        }
+        {typeof image !== "string" ? (
+          <Image
+            src={image}
+            alt={frontmatter.title}
+            widths={[480, 960, 1440]}
+            sizes="(max-width: 1200px) calc(100vw - 2rem), 480px"
+          />
+        ) : (
+          <img src={image} alt={frontmatter.title} />
+        )}
       </div>
     </div>
   </div>
