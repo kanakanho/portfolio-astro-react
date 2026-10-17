@@ -1,13 +1,5 @@
 import type { ImageMetadata } from "astro";
 
-export type FrontmatterWork = {
-  worksDisplay?: boolean | null;
-  worksIsLarge?: boolean | null;
-  worksTitle?: string | null;
-  worksDescription?: string | null;
-  worksImage?: ImageMetadata | string | null;
-};
-
 type Frontmatter = {
   isActive: boolean;
   number: string;
@@ -21,7 +13,6 @@ type Frontmatter = {
     website?: string | null;
     image?: ImageMetadata | string | null;
   };
-  works?: FrontmatterWorks;
 };
 
 export default Frontmatter;
