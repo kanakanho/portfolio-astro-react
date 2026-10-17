@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild: true
+  # sass の optional 依存。ビルド済みのバイナリを使うのでインストールスクリプトは不要
+  '@parcel/watcher': false
