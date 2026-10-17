@@ -1,5 +1,6 @@
 ---
 import type Frontmatter from "@/types/Frontmatter";
+import { Image } from "astro:assets";
 import styles from "./PostCard.module.scss";
 import Tag from "./tag/Tag.astro";
 
@@ -8,6 +9,7 @@ type Props = {
 };
 
 const { frontmatter } = Astro.props;
+const image = frontmatter.options?.image ?? "/default_img.png";
 ---
 
 <a href={`/posts/${frontmatter.number}`}>
@@ -21,7 +23,18 @@ const { frontmatter } = Astro.props;
       <p class={styles.description}>{frontmatter.options?.description}</p>
       <div class={styles.postLink}>詳しくはこちら →</div>
       <div class={styles.imgBox}>
-        <img src={frontmatter.options?.image ?? "/default_img.png"} alt={frontmatter.title} />
+        {
+          typeof image !== "string" ? (
+            <Image
+              src={image}
+              alt={frontmatter.title}
+              widths={[480, 960, 1440]}
+              sizes="(max-width: 1200px) calc(100vw - 2rem), 480px"
+            />
+          ) : (
+            <img src={image} alt={frontmatter.title} />
+          )
+        }
       </div>
     </div>
   </div>

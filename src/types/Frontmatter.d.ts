@@ -1,9 +1,11 @@
+import type { ImageMetadata } from "astro";
+
 export type FrontmatterWork = {
   worksDisplay?: boolean | null;
   worksIsLarge?: boolean | null;
   worksTitle?: string | null;
   worksDescription?: string | null;
-  worksImage?: string | null;
+  worksImage?: ImageMetadata | string | null;
 };
 
 type Frontmatter = {
@@ -17,7 +19,7 @@ type Frontmatter = {
     repository?: string | null;
     youtube?: string | null;
     website?: string | null;
-    image?: string | null;
+    image?: ImageMetadata | string | null;
   };
   works?: FrontmatterWorks;
 };
