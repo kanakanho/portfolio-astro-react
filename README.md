@@ -4,7 +4,6 @@
   - Vite
   - React
 - Biome
-- Storybook
 
 # Getting Started
 
@@ -27,11 +26,3 @@ $ pnpm preview
 ```sh
 $ pnpm biome
 ```
-
-## Storybook
-```sh
-$ pnpm storybook
-```
-
-> [!WARNING]
-> Storybook は React コンポーネントでのみ利用が可能です
