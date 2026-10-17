@@ -1,5 +1,5 @@
-import type Frontmatter from "@/types/Frontmatter";
 import type { ReactElement } from "react";
+import type Frontmatter from "@/types/Frontmatter";
 import styles from "./Imgs.module.scss";
 
 type Props = {
