@@ -1,12 +1,16 @@
 // @ts-check
 // esa にアップロードした画像・PDF を自前でホスティングするための共通処理
-// ビルド前スクリプト (scripts/fetch-post-images.mjs)・rehype プラグイン・content config から使う
-import { existsSync } from "node:fs";
+// ビルド前スクリプト (scripts/fetch-post-images.mjs)・remark / rehype プラグイン・content config から使う
+// - 本文・frontmatter の画像は assets/post-images から import させ、Astro の画像最適化 (astro:assets) に乗せる
+// - それ以外 (PDF、リンク先の画像、変換できなかった HTML 中の画像) は public/post-images からそのまま配信する
+import { existsSync, statSync } from "node:fs";
 import path from "node:path";
 
+/** 記事の markdown を置くディレクトリ */
+export const POST_DIR = "src/content/post";
 /** 画像を保管するディレクトリ (リポジトリにコミットする) */
 export const ARCHIVE_DIR = "assets/post-images";
-/** ビルド時に画像を配置するディレクトリ (public 配下) */
+/** ビルド時にファイルを配置するディレクトリ (public 配下) */
 export const PUBLIC_DIR = "public/post-images";
 /** 配信時のパス */
 export const PUBLIC_PATH = "/post-images";
@@ -17,12 +21,70 @@ const ESA_URL_SOURCE =
 /** @returns {RegExp} esa の添付ファイル URL にマッチする正規表現 (g フラグ付き) */
 export const esaUrlPattern = () => new RegExp(ESA_URL_SOURCE, "g");
 
+/** Astro の画像最適化で扱える拡張子 */
+const IMAGE_EXTENSIONS = new Set(["jpg", "jpeg", "png", "gif", "webp", "avif", "tiff", "svg"]);
+
+/**
+ * @param {string} fileName
+ * @returns {boolean} Astro の画像最適化に乗せるファイルか
+ */
+const isImageFile = (fileName) => IMAGE_EXTENSIONS.has(path.extname(fileName).slice(1));
+
 /**
  * @param {string} uuid
  * @param {string} ext
  * @returns {string} 保存時のファイル名
  */
 export const toFileName = (uuid, ext) => `${uuid}.${ext.toLowerCase()}`;
+
+/** URL 全体が esa の添付ファイル URL か (クエリ・フラグメントは許容する) */
+const ESA_URL_EXACT_PATTERN = new RegExp(`^${ESA_URL_SOURCE}(?:[?#].*)?$`);
+
+/**
+ * @param {string} url
+ * @returns {boolean} esa の添付ファイル URL か
+ */
+const isEsaUrl = (url) => ESA_URL_EXACT_PATTERN.test(url);
+
+/**
+ * esa の画像 URL を assets/post-images に保管済みのファイル名に変換する
+ * @param {string} url
+ * @returns {string | undefined} 画像でない・保管されていないときは undefined
+ */
+const toArchivedImage = (url) => {
+  const match = ESA_URL_EXACT_PATTERN.exec(url);
+  if (!match) return undefined;
+  const fileName = toFileName(match[1], match[2]);
+  return isImageFile(fileName) && existsSync(path.join(ARCHIVE_DIR, fileName))
+    ? fileName
+    : undefined;
+};
+
+/**
+ * @param {string} fromDir
+ * @param {string} fileName
+ * @returns {string} fromDir から保管済み画像への相対パス (Astro が import できる形)
+ */
+const toRelativeImagePath = (fromDir, fileName) => {
+  const relative = path
+    .relative(fromDir, path.resolve(ARCHIVE_DIR, fileName))
+    .split(path.sep)
+    .join("/");
+  return relative.startsWith(".") ? relative : `./${relative}`;
+};
+
+/**
+ * frontmatter の画像 URL を content collection の image() で読み込める相対パスに変換する
+ * esa の URL で保管されていないものは表示できないので undefined にし、esa 以外の URL はそのまま返す
+ * @param {string | null | undefined} url
+ * @returns {string | undefined}
+ */
+export const toPostImagePath = (url) => {
+  if (url == null) return undefined;
+  const fileName = toArchivedImage(url);
+  if (fileName) return toRelativeImagePath(path.resolve(POST_DIR), fileName);
+  return isEsaUrl(url) ? undefined : url;
+};
 
 /**
  * 文字列中の esa の URL を自前ホスティングのパスに置き換える
@@ -48,13 +110,174 @@ export const findEsaUrls = (text) =>
     fileName: toFileName(match[1], match[2]),
   }));
 
+/** @type {Map<string, Promise<number | undefined>>} */
+const naturalWidthCache = new Map();
+
+/**
+ * @param {string} fileName
+ * @returns {Promise<number | undefined>} 保管済み画像の実際の横幅
+ */
+const getNaturalWidth = (fileName) => {
+  const filePath = path.join(ARCHIVE_DIR, fileName);
+  // dev サーバーの起動中に画像が差し替えられても古い横幅を使わないように更新日時もキーに含める
+  const key = `${fileName}:${statSync(filePath).mtimeMs}`;
+  let width = naturalWidthCache.get(key);
+  if (width === undefined) {
+    // GitHub Actions では依存をインストールせずにスクリプトを動かすので、使うときに読み込む
+    width = import("sharp")
+      .then(({ default: sharp }) => sharp(filePath).metadata())
+      .then((metadata) => metadata.width);
+    naturalWidthCache.set(key, width);
+  }
+  return width;
+};
+
+/**
+ * HTML の <img> 要素を markdown の画像ノードに変換する
+ * Astro の画像最適化は markdown の画像記法にしか効かないため
+ * @param {any} element hast の img 要素
+ * @param {string} fromDir
+ * @returns {Promise<any | undefined>} 保管済みの esa の画像でないときは undefined
+ */
+const imgElementToImageNode = async (element, fromDir) => {
+  const { src, alt, title, width, height, ...rest } = element.properties;
+  const fileName = typeof src === "string" ? toArchivedImage(src) : undefined;
+  if (!fileName) return undefined;
+
+  // 高さは Astro が縦横比から計算するので渡さない
+  /** @type {Record<string, unknown>} */
+  const hProperties = { ...rest };
+  const displayWidth = Number(width);
+  if (displayWidth > 0 && !fileName.endsWith(".svg")) {
+    // esa の width は表示幅なので縮小には使い、拡大はしない
+    const naturalWidth = await getNaturalWidth(fileName);
+    hProperties.width = Math.round(
+      naturalWidth ? Math.min(displayWidth, naturalWidth) : displayWidth,
+    );
+  }
+
+  return {
+    type: "image",
+    url: toRelativeImagePath(fromDir, fileName),
+    alt: typeof alt === "string" ? alt : "",
+    title: typeof title === "string" ? title : null,
+    data: { hProperties },
+  };
+};
+
+/**
+ * <img> とその間の空白だけからなる HTML ノードを、画像ノードと HTML ノードの列に変換する
+ * 保管済みの esa の画像は画像ノードに、それ以外の <img> は元の HTML のまま残す
+ * @param {string} html
+ * @param {string} fromDir
+ * @returns {Promise<any[] | undefined>} <img> 以外を含むときは undefined
+ */
+const htmlToImageNodes = async (html, fromDir) => {
+  if (!/<img\b/i.test(html)) return undefined;
+  const { fromHtml } = await import("hast-util-from-html");
+  const fragment = fromHtml(html, { fragment: true });
+  const onlyImages = fragment.children.every(
+    /** @param {any} child */
+    (child) =>
+      (child.type === "element" && child.tagName === "img") ||
+      (child.type === "text" && child.value.trim() === ""),
+  );
+  if (!onlyImages) return undefined;
+
+  const nodes = await Promise.all(
+    fragment.children
+      .filter(/** @param {any} child */ (child) => child.type === "element")
+      .map(
+        /** @param {any} element */
+        async (element) =>
+          (await imgElementToImageNode(element, fromDir)) ?? {
+            type: "html",
+            value: html.slice(element.position.start.offset, element.position.end.offset),
+          },
+      ),
+  );
+  return nodes.some((node) => node.type === "image") ? nodes : undefined;
+};
+
+/**
+ * 本文中の esa の画像を assets/post-images の相対パスに書き換え、Astro の画像最適化に乗せる remark プラグイン
+ * Astro が画像を集める処理より前に動く必要があるため remark の段階で書き換える
+ * @returns {(tree: any, file: import("vfile").VFile) => Promise<void>}
+ */
+export const remarkPostImages = () => async (tree, file) => {
+  if (typeof file.path !== "string") return;
+  const fromDir = path.dirname(file.path);
+
+  /** @type {Promise<void>[]} */
+  const tasks = [];
+  /** @param {any} node */
+  const visit = (node) => {
+    // 参照形式 ([id]: url) の定義はリンクと共有されることがあるので書き換えない
+    if (node.type === "image" && typeof node.url === "string") {
+      const fileName = toArchivedImage(node.url);
+      if (fileName) node.url = toRelativeImagePath(fromDir, fileName);
+    }
+    for (const [index, child] of (node.children ?? []).entries()) {
+      if (child.type === "html") {
+        tasks.push(
+          htmlToImageNodes(child.value, fromDir).then((nodes) => {
+            if (nodes) node.children[index] = { type: "fragment", children: nodes };
+          }),
+        );
+      } else {
+        visit(child);
+      }
+    }
+  };
+  visit(tree);
+  await Promise.all(tasks);
+
+  // 置き換えたノードを親の children に展開する
+  /** @param {any} node */
+  const flatten = (node) => {
+    if (!node.children) return;
+    node.children = node.children.flatMap(
+      /** @param {any} child */ (child) => (child.type === "fragment" ? child.children : [child]),
+    );
+    node.children.forEach(flatten);
+  };
+  flatten(tree);
+};
+
+/**
+ * hast のプロパティ名を HTML の属性名に変換する
+ * className は class に、dataFoo / ariaLabel は data-foo / aria-label に、それ以外は小文字にする
+ * (HTML の属性名は大文字・小文字を区別しない)
+ * @param {string} key
+ * @returns {string}
+ */
+const toAttributeName = (key) => {
+  if (key === "className") return "class";
+  if (key === "htmlFor") return "for";
+  if (/^(data|aria)[A-Z]/.test(key)) {
+    return key.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`);
+  }
+  return key.toLowerCase();
+};
+
 /**
  * markdown を HTML に変換した後の要素の属性 (src, href など) の esa の URL を置き換える rehype プラグイン
+ * remark で画像ノードにできなかったもの (PDF、リンク先の画像など) が対象
  * @returns {(tree: any) => void}
  */
 export const rehypePostImages = () => (tree) => {
   /** @param {any} node */
   const visit = (node) => {
+    // Astro は最適化する画像のプロパティをそのまま属性として出力するので、
+    // hast のプロパティ名 (className など) を HTML の属性名 (class など) に戻しておく
+    if (node.type === "element" && node.tagName === "img" && node.properties) {
+      node.properties = Object.fromEntries(
+        Object.entries(node.properties).map(([key, value]) => [
+          toAttributeName(key),
+          Array.isArray(value) ? value.join(key === "srcSet" ? ", " : " ") : value,
+        ]),
+      );
+    }
     if (node.type === "element" && node.properties) {
       for (const [key, value] of Object.entries(node.properties)) {
         // srcSet などのカンマ・スペース区切りの属性は配列になっている

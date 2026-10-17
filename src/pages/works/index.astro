@@ -5,6 +5,7 @@ import Works from "@/components/works/Works";
 import Layout from "@/layouts/Layout.astro";
 import type Frontmatter from "@/types/Frontmatter";
 import DefaultMetadata from "@/utils/DefaultMetadata";
+import { getImage } from "astro:assets";
 import { getCollection } from "astro:content";
 
 const postFrontmatters: Frontmatter[] = (await getCollection("post")).map((post: any) => post.data);
@@ -15,6 +16,15 @@ const frontmatters: Frontmatter[] = postFrontmatters
     return new Date(a.date) < new Date(b.date) ? 1 : -1;
   })
   .map((frontmatter) => frontmatter);
+
+const worksFrontmatters: Frontmatter[] = await Promise.all(
+  frontmatters.map(async (frontmatter) => {
+    const worksImage = frontmatter.works?.worksImage;
+    if (worksImage == null || typeof worksImage === "string") return frontmatter;
+    const optimized = await getImage({ src: worksImage, width: 960, fit: "inside" });
+    return { ...frontmatter, works: { ...frontmatter.works, worksImage: optimized.src } };
+  }),
+);
 
 const frontmattersWorksSmall: Frontmatter[] = postFrontmatters
   .filter((frontmatter) => !frontmatter.works?.worksIsLarge)
@@ -33,6 +43,6 @@ const frontmattersWorksLarge: Frontmatter[] = postFrontmatters
 
 <Layout metadata={DefaultMetadata}>
   <Header navigate="works" />
-  <Works frontmatters={frontmatters} />
+  <Works frontmatters={worksFrontmatters} />
   <Footer />
 </Layout>

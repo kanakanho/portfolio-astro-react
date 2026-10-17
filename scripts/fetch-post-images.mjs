@@ -1,14 +1,19 @@
 // @ts-check
-// 記事中の esa の画像・PDF を集めて public/post-images に配置する
-// - assets/post-images にあればそれを使う
-// - なければ esa からダウンロードし、assets/post-images にも保存する (GitHub Actions でコミットされる)
+// 記事中の esa の画像・PDF を集めて assets/post-images に保管する
+// - assets/post-images になければ esa からダウンロードして保存する (GitHub Actions でコミットされる)
+// - public/post-images にも配置する (本文の画像は Astro が assets/post-images から読み込んで最適化するが、
+//   リンク先の画像や PDF など最適化できないものはここから配信する)
 // - どちらからも取得できなかったものは警告を出す (--strict のときは終了コード 1)
 import { copyFile, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { ARCHIVE_DIR, PUBLIC_DIR, findEsaUrls } from "../src/utils/PostImages.mjs";
+import {
+  ARCHIVE_DIR,
+  POST_DIR,
+  PUBLIC_DIR,
+  findEsaUrls,
+} from "../src/utils/PostImages.mjs";
 
-const POST_DIR = "src/content/post";
 const STRICT = process.argv.includes("--strict");
 
 /**

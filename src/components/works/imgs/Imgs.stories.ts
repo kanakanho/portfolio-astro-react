@@ -20,7 +20,6 @@ export const Primary: Story = {
         options: {
           description: "イベントの説明をここに記入します",
           website: "https://example.com/",
-          image: "/default_img.png",
         },
         works: {
           worksDisplay: true,
