@@ -21,7 +21,7 @@ const worksFrontmatters: Frontmatter[] = await Promise.all(
   frontmatters.map(async (frontmatter) => {
     const worksImage = frontmatter.works?.worksImage;
     if (worksImage == null || typeof worksImage === "string") return frontmatter;
-    const optimized = await getImage({ src: worksImage, width: 960, fit: "inside" });
+    const optimized = await getImage({ src: worksImage, width: 960 });
     return { ...frontmatter, works: { ...frontmatter.works, worksImage: optimized.src } };
   }),
 );

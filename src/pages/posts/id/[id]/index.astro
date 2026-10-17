@@ -6,7 +6,7 @@ import Layout from "@/layouts/Layout.astro";
 import type Frontmatter from "@/types/Frontmatter";
 import { GetPostMetadata } from "@/utils/PostMetadata";
 import type { InferGetStaticPropsType } from "astro";
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, render, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
   const posts: CollectionEntry<"post">[] = await getCollection("post");
@@ -25,7 +25,7 @@ const frontmatter: Frontmatter = post.data;
 
 const metaData = await GetPostMetadata(frontmatter);
 
-const { Content } = await post.render();
+const { Content } = await render(post);
 ---
 
 <Layout metadata={metaData}>
